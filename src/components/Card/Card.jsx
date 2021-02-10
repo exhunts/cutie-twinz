@@ -1,8 +1,7 @@
-import cardbackImage from '../assets/images/cardback-cropped.png'
-import mouseImage from '../assets/images/mouse.png'
+import cardbackImage from '../../assets/images/cardback-cropped.png'
 import './App/App.css'
 
-export default function Card() {
+export default function Card({ image }) {
   return (
     <div className="flip-card">
       <div className="flip-card-inner ">
@@ -10,7 +9,7 @@ export default function Card() {
           <img className="cardback" src={cardbackImage} alt="cardback" />
         </div>
         <div className="flip-card-back">
-          <img className="cardback" src={mouseImage} alt="cardback" />
+          <img className="cardback" src={image} alt="cardback" />
         </div>
       </div>
     </div>
