@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Card from '../Card/Card'
 import './App.css'
 import { shuffle } from '../../utils/utils'
+import { useState } from 'react'
 
 // const card = {
 //   image: '',
@@ -165,12 +166,12 @@ const cardImagesArr = [
   baloonImage,
 ]
 
+shuffle(cardImagesArr)
 function App() {
-  shuffle(cardImagesArr)
-  const cards = [
+  const [cards, setCards] = useState([
     {
       image: cardImagesArr[0],
-      isOpen: false,
+      isOpen: true,
     },
     {
       image: cardImagesArr[1],
@@ -248,7 +249,89 @@ function App() {
       image: cardImagesArr[19],
       isOpen: false,
     },
-  ]
+  ])
+  // const cards = [
+  //   {
+  //     image: cardImagesArr[0],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[1],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[2],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[3],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[4],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[5],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[6],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[7],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[8],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[9],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[10],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[11],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[12],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[13],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[14],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[15],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[16],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[17],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[18],
+  //     isOpen: false,
+  //   },
+  //   {
+  //     image: cardImagesArr[19],
+  //     isOpen: false,
+  //   },
+  // ]
   // const cards = [
   //   [
   //     {
@@ -341,7 +424,7 @@ function App() {
   //     },
   //   ],
   // ]
-
+  console.log(cards)
   return (
     <div className="game">
       <div className="inner">
@@ -351,8 +434,8 @@ function App() {
             {/* {cards.map(({ image, isOpen }) => (
               <Card key={uuidv4()} image={image} isOpen={isOpen} />
             ))} */}
-            {cards.map(({ image, isOpen }) => (
-              <Card key={uuidv4()} image={image} isOpen={isOpen} />
+            {cards.map((card, index) => (
+              <Card key={uuidv4()} card={card} state={cards} index={index} />
             ))}
           </div>
         </div>

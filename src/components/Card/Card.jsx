@@ -3,16 +3,21 @@ import cardbackImage from '../../assets/images/cardback-cropped.png'
 // import './App/App.css'
 import styles from './Card.module.css'
 
-export default function Card({ image, isOpen }) {
-  const [opened, setOpened] = useState(false)
+export default function Card({ card, state, index }) {
+  // const [opened, setOpened] = useState(false)
+  console.log(index)
+
+  const onClickHandler = () => {
+    // setOpened(prev => !prev)
+    card.isOpen = true
+  }
 
   return (
-    <div
-      onClick={() => setOpened(prev => !prev)}
-      className={styles['flip-card']}
-    >
+    <div onClick={onClickHandler} className={styles['flip-card']}>
       <div
-        className={`${styles['flip-card-inner']} ${opened && styles['flip']}`}
+        className={`${styles['flip-card-inner']} ${
+          card.isOpen && styles['flip']
+        }`}
       >
         <div className={styles['flip-card-front']}>
           <img
@@ -22,7 +27,7 @@ export default function Card({ image, isOpen }) {
           />
         </div>
         <div className={styles['flip-card-back']}>
-          <img className={styles['cardback']} src={image} alt="cardback" />
+          <img className={styles['cardback']} src={card.image} alt="cardback" />
         </div>
       </div>
     </div>
