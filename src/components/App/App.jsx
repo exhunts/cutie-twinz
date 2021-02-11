@@ -269,46 +269,6 @@ function App() {
             {cards.flat().map(({ image, isOpen }) => (
               <Card image={image} isOpen={isOpen} />
             ))}
-            {/* <Card image={mouseImage} isOpen={false} />
-            <Card image={bunnyImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} />
-            <Card image={mouseImage} /> */}
-
-            {/* <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" />
-            <img className="cardback" src={cardbackImage} alt="cardback" /> */}
           </div>
         </div>
       </div>
