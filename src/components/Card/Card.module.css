@@ -15,9 +15,9 @@
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
-.flip-card:hover .flip-card-inner {
+/* .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
-}
+} */
 
 /* This container is needed to position the front and back side */
 .flip-card-inner {

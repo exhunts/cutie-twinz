@@ -11,7 +11,8 @@ import glassBallImage from '../../assets/images/glass-ball.png'
 import iceCreamImage from '../../assets/images/ice-cream.png'
 import baloonImage from '../../assets/images/baloon.png'
 
-// import
+import { v4 as uuidv4 } from 'uuid'
+
 import Card from '../Card/Card'
 import './App.css'
 import { shuffle } from '../../utils/utils'
@@ -166,99 +167,180 @@ const cardImagesArr = [
 
 function App() {
   shuffle(cardImagesArr)
-
   const cards = [
-    [
-      {
-        image: cardImagesArr[0],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[1],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[2],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[3],
-        isOpen: false,
-      },
-    ],
-    [
-      {
-        image: cardImagesArr[4],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[5],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[6],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[7],
-        isOpen: false,
-      },
-    ],
-    [
-      {
-        image: cardImagesArr[8],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[9],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[10],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[11],
-        isOpen: false,
-      },
-    ],
-    [
-      {
-        image: cardImagesArr[12],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[13],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[14],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[15],
-        isOpen: false,
-      },
-    ],
-    [
-      {
-        image: cardImagesArr[16],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[17],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[18],
-        isOpen: false,
-      },
-      {
-        image: cardImagesArr[19],
-        isOpen: false,
-      },
-    ],
+    {
+      image: cardImagesArr[0],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[1],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[2],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[3],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[4],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[5],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[6],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[7],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[8],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[9],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[10],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[11],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[12],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[13],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[14],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[15],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[16],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[17],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[18],
+      isOpen: false,
+    },
+    {
+      image: cardImagesArr[19],
+      isOpen: false,
+    },
   ]
+  // const cards = [
+  //   [
+  //     {
+  //       image: cardImagesArr[0],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[1],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[2],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[3],
+  //       isOpen: false,
+  //     },
+  //   ],
+  //   [
+  //     {
+  //       image: cardImagesArr[4],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[5],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[6],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[7],
+  //       isOpen: false,
+  //     },
+  //   ],
+  //   [
+  //     {
+  //       image: cardImagesArr[8],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[9],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[10],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[11],
+  //       isOpen: false,
+  //     },
+  //   ],
+  //   [
+  //     {
+  //       image: cardImagesArr[12],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[13],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[14],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[15],
+  //       isOpen: false,
+  //     },
+  //   ],
+  //   [
+  //     {
+  //       image: cardImagesArr[16],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[17],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[18],
+  //       isOpen: false,
+  //     },
+  //     {
+  //       image: cardImagesArr[19],
+  //       isOpen: false,
+  //     },
+  //   ],
+  // ]
 
   return (
     <div className="game">
@@ -266,8 +348,11 @@ function App() {
         <div className="field">
           <img className="frame" src={frameImage} alt="frame" />
           <div className="frame-inner">
-            {cards.flat().map(({ image, isOpen }) => (
-              <Card image={image} isOpen={isOpen} />
+            {/* {cards.map(({ image, isOpen }) => (
+              <Card key={uuidv4()} image={image} isOpen={isOpen} />
+            ))} */}
+            {cards.map(({ image, isOpen }) => (
+              <Card key={uuidv4()} image={image} isOpen={isOpen} />
             ))}
           </div>
         </div>
