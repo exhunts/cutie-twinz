@@ -10,13 +10,55 @@ export default function Card({
   setCurrentlyOpened,
   cards,
   setCards,
+  setAmountOfUncovered,
+  setIsFieldClickable,
 }) {
   const onClickHandler = () => {
-    setCurrentlyOpened(prev => [...prev, card.id])
-    setCards(prev => toggleCardByIndex(prev, card.id))
-    console.log(currentlyOpened.length)
-    if (currentlyOpened.length === 2) {
-      setCurrentlyOpened(prev => [])
+    if (card.isOpenable) {
+      setCurrentlyOpened(prev => [...prev, card.id])
+      setCards(prev => toggleCardByIndex(prev, card.id))
+      console.log(currentlyOpened.length)
+      const clonedCurrentlyOpened = [...currentlyOpened, card.id]
+
+      // if (clonedCurrentlyOpened.length === 1)
+      //   console.log(
+      //     'clonedCurrentlyOpened',
+      //     cards[clonedCurrentlyOpened[0]].image
+      //   )
+      // if (clonedCurrentlyOpened.length === 2)
+      //   console.log(
+      //     'clonedCurrentlyOpened',
+      //     cards[clonedCurrentlyOpened[1]].image
+      //   )
+
+      if (
+        clonedCurrentlyOpened.length === 2 &&
+        cards[clonedCurrentlyOpened[0]].image ===
+          cards[clonedCurrentlyOpened[1]].image
+      ) {
+        setCurrentlyOpened(prev => [])
+        setAmountOfUncovered(prev => prev + 2)
+        return
+      }
+
+      if (
+        clonedCurrentlyOpened.length === 2 &&
+        cards[clonedCurrentlyOpened[0]].image !==
+          cards[clonedCurrentlyOpened[1]].image
+      ) {
+        setIsFieldClickable(false)
+        new Promise(() => {
+          setTimeout(() => {
+            setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[0]))
+            setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[1]))
+            setCurrentlyOpened(prev => [])
+            setIsFieldClickable(true)
+          }, 1000)
+        })
+        // setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[0]))
+        // setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[1]))
+        // setCurrentlyOpened(prev => [])
+      }
     }
     // if (
     //   currentlyOpened.length === 2 &&

@@ -51,106 +51,129 @@ function App() {
   // const currentlyOpened = []
   // const [, set] = useState(initialState)
   const [currentlyOpened, setCurrentlyOpened] = useState([])
+  const [isFieldClickable, setIsFieldClickable] = useState(true)
+  // const [openable, setOpenable] = useState(initialState)
+  const [amountOfUncovered, setAmountOfUncovered] = useState(0)
   const [cards, setCards] = useState([
     {
       id: 0,
       image: cardImagesArr[0],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 1,
       image: cardImagesArr[1],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 2,
       image: cardImagesArr[2],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 3,
       image: cardImagesArr[3],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 4,
       image: cardImagesArr[4],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 5,
       image: cardImagesArr[5],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 6,
       image: cardImagesArr[6],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 7,
       image: cardImagesArr[7],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 8,
       image: cardImagesArr[8],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 9,
       image: cardImagesArr[9],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 10,
       image: cardImagesArr[10],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 11,
       image: cardImagesArr[11],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 12,
       image: cardImagesArr[12],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 13,
       image: cardImagesArr[13],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 14,
       image: cardImagesArr[14],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 15,
       image: cardImagesArr[15],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 16,
       image: cardImagesArr[16],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 17,
       image: cardImagesArr[17],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 18,
       image: cardImagesArr[18],
       isOpen: false,
+      isOpenable: true,
     },
     {
       id: 19,
       image: cardImagesArr[19],
       isOpen: false,
+      isOpenable: true,
     },
   ])
 
@@ -183,7 +206,13 @@ function App() {
   // }, [])
 
   return (
-    <div className="game">
+    <div
+      className="game"
+      style={
+        isFieldClickable ? { pointerEvents: 'auto' } : { pointerEvents: 'none' }
+      }
+    >
+      {amountOfUncovered === 20 && <div>All right</div>}
       <div className="inner">
         <div className="field">
           <img className="frame" src={frameImage} alt="frame" />
@@ -198,6 +227,8 @@ function App() {
                 index={index}
                 cards={cards}
                 setCards={setCards}
+                setAmountOfUncovered={setAmountOfUncovered}
+                setIsFieldClickable={setIsFieldClickable}
               />
             ))}
           </div>
