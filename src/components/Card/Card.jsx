@@ -3,13 +3,40 @@ import cardbackImage from '../../assets/images/cardback-cropped.png'
 // import './App/App.css'
 import styles from './Card.module.css'
 
-export default function Card({ card, state, index }) {
-  // const [opened, setOpened] = useState(false)
-  console.log(index)
-
+export default function Card({
+  card,
+  index,
+  currentlyOpened,
+  setCurrentlyOpened,
+  cards,
+  setCards,
+}) {
   const onClickHandler = () => {
-    // setOpened(prev => !prev)
-    card.isOpen = true
+    setCurrentlyOpened(prev => [...prev, card.id])
+    setCards(prev => toggleCardByIndex(prev, card.id))
+    console.log(currentlyOpened.length)
+    if (currentlyOpened.length === 2) {
+      setCurrentlyOpened(prev => [])
+    }
+    // if (
+    //   currentlyOpened.length === 2 &&
+    //   currentlyOpened[0] === currentlyOpened[1]
+    // ) {
+    //   setCards(prev => toggleCardByIndex(prev, currentlyOpened[0]))
+    //   setCards(prev => toggleCardByIndex(prev, currentlyOpened[1]))
+    //   return
+    // }
+  }
+
+  const toggleCardByIndex = (cards, index) => {
+    const cardsCloned = [...cards]
+    const beforeSlice = cardsCloned.slice(0, index)
+    const cardToToggle = {
+      ...cardsCloned[index],
+      isOpen: !cardsCloned[index].isOpen,
+    }
+    const afterSlice = cardsCloned.slice(index + 1)
+    return [...beforeSlice, cardToToggle, ...afterSlice]
   }
 
   return (
