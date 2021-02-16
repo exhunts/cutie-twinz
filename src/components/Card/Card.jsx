@@ -10,9 +10,8 @@ import styles from './Card.module.css'
 
 export default function Card({
   card,
-  index,
-  currentlyOpened,
-  setCurrentlyOpened,
+  activePairCardsArray,
+  setActivePairCardsArray,
   cards,
   setCards,
   setAmountOfUncovered,
@@ -23,24 +22,13 @@ export default function Card({
   const [playCongrats] = useSound(congratsSound)
   const [playWrongSound] = useSound(wrongSound)
   const [playRightSound] = useSound(rightSound)
+
   const onClickHandler = () => {
     if (card.isOpen) return
     if (card.isOpenable) {
-      setCurrentlyOpened(prev => [...prev, card.id])
+      setActivePairCardsArray(prev => [...prev, card.id])
       setCards(prev => toggleCardByIndex(prev, card.id))
-      // console.log(currentlyOpened.length)
-      const clonedCurrentlyOpened = [...currentlyOpened, card.id]
-
-      // if (clonedCurrentlyOpened.length === 1)
-      //   console.log(
-      //     'clonedCurrentlyOpened',
-      //     cards[clonedCurrentlyOpened[0]].image
-      //   )
-      // if (clonedCurrentlyOpened.length === 2)
-      //   console.log(
-      //     'clonedCurrentlyOpened',
-      //     cards[clonedCurrentlyOpened[1]].image
-      //   )
+      const clonedCurrentlyOpened = [...activePairCardsArray, card.id]
 
       if (
         clonedCurrentlyOpened.length === 2 &&
@@ -48,7 +36,7 @@ export default function Card({
           cards[clonedCurrentlyOpened[1]].image
       ) {
         playRightSound()
-        setCurrentlyOpened(prev => [])
+        setActivePairCardsArray([])
         setAmountOfUncovered(prev => prev + 2)
         if (amountOfUncovered + 2 === 20) playCongrats()
         return
@@ -65,23 +53,12 @@ export default function Card({
           setTimeout(() => {
             setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[0]))
             setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[1]))
-            setCurrentlyOpened(prev => [])
+            setActivePairCardsArray(prev => [])
             setIsFieldClickable(true)
           }, 1000)
         })
-        // setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[0]))
-        // setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[1]))
-        // setCurrentlyOpened(prev => [])
       }
     }
-    // if (
-    //   currentlyOpened.length === 2 &&
-    //   currentlyOpened[0] === currentlyOpened[1]
-    // ) {
-    //   setCards(prev => toggleCardByIndex(prev, currentlyOpened[0]))
-    //   setCards(prev => toggleCardByIndex(prev, currentlyOpened[1]))
-    //   return
-    // }
     play()
   }
 
