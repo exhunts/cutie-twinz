@@ -19,7 +19,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import Card from '../Card/Card'
 import './App.css'
-import { shuffle } from '../../utils/utils'
+import { shuffle, shuffle2 } from '../../utils/utils'
 import { useEffect, useRef, useState } from 'react'
 import useSound from 'use-sound'
 // let audioEl = null
@@ -58,6 +58,50 @@ function App() {
   // const refCardImages = useRef()
   // const currentlyOpened = []
   // const [, set] = useState(initialState)
+  // const [cardImagesArr, setCardImagesArr] = useState([
+  //   mouseImage,
+  //   bunnyImage,
+  //   carImage,
+  //   kittyImage,
+  //   emeraldImage,
+  //   potatoHeadImage,
+  //   fishImage,
+  //   glassBallImage,
+  //   iceCreamImage,
+  //   baloonImage,
+  //   mouseImage,
+  //   bunnyImage,
+  //   carImage,
+  //   kittyImage,
+  //   emeraldImage,
+  //   potatoHeadImage,
+  //   fishImage,
+  //   glassBallImage,
+  //   iceCreamImage,
+  //   baloonImage,
+  // ])
+  // const refCardImagesArr = useRef([
+  //   mouseImage,
+  //   bunnyImage,
+  //   carImage,
+  //   kittyImage,
+  //   emeraldImage,
+  //   potatoHeadImage,
+  //   fishImage,
+  //   glassBallImage,
+  //   iceCreamImage,
+  //   baloonImage,
+  //   mouseImage,
+  //   bunnyImage,
+  //   carImage,
+  //   kittyImage,
+  //   emeraldImage,
+  //   potatoHeadImage,
+  //   fishImage,
+  //   glassBallImage,
+  //   iceCreamImage,
+  //   baloonImage,
+  // ])
   const [currentlyOpened, setCurrentlyOpened] = useState([])
   // const [audio] = useState(new Audio('../../assets/audio/music/main.mp3'))
   // const [playing, setPlaying] = useState(true)
@@ -72,125 +116,247 @@ function App() {
   const [cards, setCards] = useState([
     {
       id: 0,
-      image: cardImagesArr[0],
+      image: mouseImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 1,
-      image: cardImagesArr[1],
+      image: mouseImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 2,
-      image: cardImagesArr[2],
+      image: bunnyImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 3,
-      image: cardImagesArr[3],
+      image: bunnyImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 4,
-      image: cardImagesArr[4],
+      image: carImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 5,
-      image: cardImagesArr[5],
+      image: carImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 6,
-      image: cardImagesArr[6],
+      image: kittyImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 7,
-      image: cardImagesArr[7],
+      image: kittyImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 8,
-      image: cardImagesArr[8],
+      image: emeraldImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 9,
-      image: cardImagesArr[9],
+      image: emeraldImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 10,
-      image: cardImagesArr[10],
+      image: potatoHeadImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 11,
-      image: cardImagesArr[11],
+      image: potatoHeadImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 12,
-      image: cardImagesArr[12],
+      image: fishImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 13,
-      image: cardImagesArr[13],
+      image: fishImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 14,
-      image: cardImagesArr[14],
+      image: glassBallImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 15,
-      image: cardImagesArr[15],
+      image: glassBallImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 16,
-      image: cardImagesArr[16],
+      image: iceCreamImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 17,
-      image: cardImagesArr[17],
+      image: iceCreamImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 18,
-      image: cardImagesArr[18],
+      image: baloonImage,
       isOpen: false,
       isOpenable: true,
     },
     {
       id: 19,
-      image: cardImagesArr[19],
+      image: baloonImage,
       isOpen: false,
       isOpenable: true,
     },
   ])
+  // const [cards, setCards] = useState([
+  //   {
+  //     id: 0,
+  //     image: cardImagesArr[0],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 1,
+  //     image: cardImagesArr[1],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: cardImagesArr[2],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 3,
+  //     image: cardImagesArr[3],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 4,
+  //     image: cardImagesArr[4],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 5,
+  //     image: cardImagesArr[5],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 6,
+  //     image: cardImagesArr[6],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 7,
+  //     image: cardImagesArr[7],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 8,
+  //     image: cardImagesArr[8],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 9,
+  //     image: cardImagesArr[9],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 10,
+  //     image: cardImagesArr[10],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 11,
+  //     image: cardImagesArr[11],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 12,
+  //     image: cardImagesArr[12],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 13,
+  //     image: cardImagesArr[13],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 14,
+  //     image: cardImagesArr[14],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 15,
+  //     image: cardImagesArr[15],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 16,
+  //     image: cardImagesArr[16],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 17,
+  //     image: cardImagesArr[17],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 18,
+  //     image: cardImagesArr[18],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  //   {
+  //     id: 19,
+  //     image: cardImagesArr[19],
+  //     isOpen: false,
+  //     isOpenable: true,
+  //   },
+  // ])
 
   // useEffect(() => {
   //   console.log('1', refCardImages.current)
@@ -243,13 +409,28 @@ function App() {
     setAmountOfUncovered(0)
     setCurrentlyOpened([])
     setIsFieldClickable(true)
-    closeAllCards()
-    console.log(cardImagesArr)
-    // cardImagesArr = shuffle(cardImagesArr)
+
+    // Almost works ------------
+    // const allCardsClosed = cards.map(card => ({ ...card, isOpen: false }))
+    // const shuffled = shuffle2(allCardsClosed)
+    // setCards(shuffled)-----------
+
+    // Not works ----------------
+    // closeAllCards(cards)
+    // setCards(shuffle2(cards))
+    // --------------------------
+    const allCardsClosed = cards.map(card => ({ ...card, isOpen: false }))
+    setCards(allCardsClosed)
+    new Promise(() => {
+      setTimeout(() => {
+        setCards(shuffle2(allCardsClosed))
+      }, 500)
+    })
+
     if (!exposedData.isPlaying) play()
   }
 
-  const closeAllCards = () => {
+  const closeAllCards = cards => {
     const allCardsClosed = cards.map(card => ({ ...card, isOpen: false }))
     setCards(allCardsClosed)
   }
