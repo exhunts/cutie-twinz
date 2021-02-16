@@ -10,6 +10,10 @@ import fishImage from '../../assets/images/fish.png'
 import glassBallImage from '../../assets/images/glass-ball.png'
 import iceCreamImage from '../../assets/images/ice-cream.png'
 import baloonImage from '../../assets/images/baloon.png'
+import buttonImage from '../../assets/images/button-start/button.png'
+import buttonArrowImage from '../../assets/images/button-start/button-arrow.png'
+
+import music from '../../assets/audio/music/main.mp3'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -17,12 +21,13 @@ import Card from '../Card/Card'
 import './App.css'
 import { shuffle } from '../../utils/utils'
 import { useEffect, useRef, useState } from 'react'
-
+import useSound from 'use-sound'
+// let audioEl = null
 // const currentlyOpened = [12, 0]
 // let isFirstOpened = false
 // let isSecondOpened = false
 
-const cardImagesArr = [
+let cardImagesArr = [
   mouseImage,
   bunnyImage,
   carImage,
@@ -46,14 +51,24 @@ const cardImagesArr = [
 ]
 
 shuffle(cardImagesArr)
+
+// const audio = new Audio('../../assets/audio/music/main.mp3')
+
 function App() {
   // const refCardImages = useRef()
   // const currentlyOpened = []
   // const [, set] = useState(initialState)
   const [currentlyOpened, setCurrentlyOpened] = useState([])
-  const [isFieldClickable, setIsFieldClickable] = useState(true)
+  // const [audio] = useState(new Audio('../../assets/audio/music/main.mp3'))
+  // const [playing, setPlaying] = useState(true)
+  const [isFieldClickable, setIsFieldClickable] = useState(false)
   // const [openable, setOpenable] = useState(initialState)
   const [amountOfUncovered, setAmountOfUncovered] = useState(0)
+  const [isGamePlaying, setisGamePlaying] = useState(false)
+  const [play, exposedData] = useSound(music, {
+    loop: true,
+  })
+
   const [cards, setCards] = useState([
     {
       id: 0,
@@ -205,15 +220,80 @@ function App() {
   //   console.log('2', refCardImages.current)
   // }, [])
 
+  // useEffect(() => {
+  //   audio.play()
+  // }, [])
+
+  // useEffect(() => {
+  // audioEl = document.getElementsByClassName('audio-element')[0]
+  // try {
+  //   audioEl.play()
+  // } catch (error) {
+  //   console.log(error)
+  // }
+  // }, [])
+
+  const playMusic = () => {
+    // const audioEl = document.getElementsByClassName('audio-element')[0]
+    // music.play()
+    // console.log(audioEl)
+  }
+
+  const startGame = () => {
+    setAmountOfUncovered(0)
+    setCurrentlyOpened([])
+    setIsFieldClickable(true)
+    closeAllCards()
+    console.log(cardImagesArr)
+    // cardImagesArr = shuffle(cardImagesArr)
+    if (!exposedData.isPlaying) play()
+  }
+
+  const closeAllCards = () => {
+    const allCardsClosed = cards.map(card => ({ ...card, isOpen: false }))
+    setCards(allCardsClosed)
+  }
+
+  // const makeAllOpenable
+
   return (
-    <div
-      className="game"
-      style={
-        isFieldClickable ? { pointerEvents: 'auto' } : { pointerEvents: 'none' }
-      }
-    >
-      {amountOfUncovered === 20 && <div>All right</div>}
-      <div className="inner">
+    <div className="game">
+      <div>{console.log(exposedData.isPlaying)}</div>
+      {/* <button onClick={play}>Play</button> */}
+      {/* <button onClick={() => audio.play()}>Play</button> */}
+      {/* <audio className="audio-element">
+        <source src="../../assets/audio/music/main.mp3"></source>
+      </audio> */}
+      {/* {amountOfUncovered === 20 && <div>All right</div>} */}
+      <div className="exlogo">
+        <div className="exlogo__outer">
+          <div className="exlogo__mid">
+            <div className="exlogo__inner"></div>
+          </div>
+        </div>
+      </div>
+
+      <div onClick={startGame} className="button-start">
+        <img
+          className="button-base"
+          src={buttonImage}
+          alt="base for start button"
+        />
+        <img
+          className="button-arrow"
+          src={buttonArrowImage}
+          alt="arrow for start button"
+        />
+      </div>
+
+      <div
+        className="inner"
+        style={
+          isFieldClickable
+            ? { pointerEvents: 'auto' }
+            : { pointerEvents: 'none' }
+        }
+      >
         <div className="field">
           <img className="frame" src={frameImage} alt="frame" />
           <div className="frame-inner">
@@ -229,6 +309,7 @@ function App() {
                 setCards={setCards}
                 setAmountOfUncovered={setAmountOfUncovered}
                 setIsFieldClickable={setIsFieldClickable}
+                amountOfUncovered={amountOfUncovered}
               />
             ))}
           </div>

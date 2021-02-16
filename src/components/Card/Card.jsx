@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import cardbackImage from '../../assets/images/cardback-cropped.png'
 // import './App/App.css'
+import flipSound from '../../assets/audio/sounds/card-flip.mp3'
+import wrongSound from '../../assets/audio/sounds/wrong.mp3'
+import rightSound from '../../assets/audio/sounds/right.mp3'
+import congratsSound from '../../assets/audio/sounds/congrats.mp3'
+import useSound from 'use-sound'
 import styles from './Card.module.css'
 
 export default function Card({
@@ -12,8 +17,14 @@ export default function Card({
   setCards,
   setAmountOfUncovered,
   setIsFieldClickable,
+  amountOfUncovered,
 }) {
+  const [play] = useSound(flipSound)
+  const [playCongrats] = useSound(congratsSound)
+  const [playWrongSound] = useSound(wrongSound)
+  const [playRightSound] = useSound(rightSound)
   const onClickHandler = () => {
+    if (card.isOpen) return
     if (card.isOpenable) {
       setCurrentlyOpened(prev => [...prev, card.id])
       setCards(prev => toggleCardByIndex(prev, card.id))
@@ -36,8 +47,10 @@ export default function Card({
         cards[clonedCurrentlyOpened[0]].image ===
           cards[clonedCurrentlyOpened[1]].image
       ) {
+        playRightSound()
         setCurrentlyOpened(prev => [])
         setAmountOfUncovered(prev => prev + 2)
+        if (amountOfUncovered + 2 === 20) playCongrats()
         return
       }
 
@@ -46,6 +59,7 @@ export default function Card({
         cards[clonedCurrentlyOpened[0]].image !==
           cards[clonedCurrentlyOpened[1]].image
       ) {
+        playWrongSound()
         setIsFieldClickable(false)
         new Promise(() => {
           setTimeout(() => {
@@ -68,6 +82,7 @@ export default function Card({
     //   setCards(prev => toggleCardByIndex(prev, currentlyOpened[1]))
     //   return
     // }
+    play()
   }
 
   const toggleCardByIndex = (cards, index) => {
