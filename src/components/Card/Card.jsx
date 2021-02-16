@@ -28,7 +28,7 @@ export default function Card({
     if (card.isOpenable) {
       setCurrentlyOpened(prev => [...prev, card.id])
       setCards(prev => toggleCardByIndex(prev, card.id))
-      console.log(currentlyOpened.length)
+      // console.log(currentlyOpened.length)
       const clonedCurrentlyOpened = [...currentlyOpened, card.id]
 
       // if (clonedCurrentlyOpened.length === 1)
