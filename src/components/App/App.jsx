@@ -15,10 +15,11 @@ import music from '../../assets/audio/music/main.mp3'
 import Card from '../Card/Card'
 import './App.css'
 import { shuffle2 } from '../../utils/utils'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useSound from 'use-sound'
 import Logo from '../Logo'
 import ButtonStartAgain from '../ButtonStartAgain'
+import ConfettiGenerator from 'confetti-js'
 
 function App() {
   const [activePairCardsArray, setActivePairCardsArray] = useState([])
@@ -169,6 +170,39 @@ function App() {
     if (!exposedData.isPlaying) play()
   }
 
+  useEffect(() => {
+    // const confettiSettings = { target: 'my-canvas' }
+    const confettiSettings = {
+      target: 'my-canvas',
+      max: '80',
+      size: '3',
+      animate: true,
+      props: [
+        'circle',
+        'square',
+        'triangle',
+        'line',
+        { type: 'svg', src: 'site/hat.svg', size: 25, weight: 0.2 },
+      ],
+      colors: [
+        [165, 104, 246],
+        [230, 61, 135],
+        [0, 199, 228],
+        [253, 214, 126],
+      ],
+      clock: '25',
+      rotate: true,
+      width: '1920',
+      height: '981',
+      start_from_edge: true,
+      respawn: true,
+    }
+    const confetti = new ConfettiGenerator(confettiSettings)
+    confetti.render()
+
+    return () => confetti.clear()
+  }, [])
+
   // const closeAllCards = cards => {
   //   const allCardsClosed = cards.map(card => ({ ...card, isOpen: false }))
   //   setCards(allCardsClosed)
@@ -176,6 +210,14 @@ function App() {
 
   return (
     <div className="game">
+      <canvas
+        id="my-canvas"
+        style={{
+          position: 'absolute',
+          zIndex: 0,
+          display: amountOfUncovered === 20 ? 'block' : 'none',
+        }}
+      ></canvas>
       <ButtonStartAgain startGame={startGame} />
       <Logo />
 

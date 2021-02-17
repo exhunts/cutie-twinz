@@ -53,7 +53,7 @@ export default function Card({
           setTimeout(() => {
             setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[0]))
             setCards(prev => toggleCardByIndex(prev, clonedCurrentlyOpened[1]))
-            setActivePairCardsArray(prev => [])
+            setActivePairCardsArray([])
             setIsFieldClickable(true)
           }, 1000)
         })
