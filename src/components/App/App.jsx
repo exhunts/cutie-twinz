@@ -12,6 +12,8 @@ import baloonImage from '../../assets/images/baloon.png'
 
 import music from '../../assets/audio/music/main.mp3'
 
+import congratsSound from '../../assets/audio/sounds/congrats.mp3'
+
 import Card from '../Card/Card'
 import './App.css'
 import { shuffle2 } from '../../utils/utils'
@@ -22,6 +24,9 @@ import ButtonStartAgain from '../ButtonStartAgain'
 import ConfettiGenerator from 'confetti-js'
 
 function App() {
+  // For cheat only
+  const [playCongrats] = useSound(congratsSound)
+
   const [activePairCardsArray, setActivePairCardsArray] = useState([])
 
   // const [activePairCardsArray, setActivePairCardsArray] = useState([])
@@ -169,6 +174,21 @@ function App() {
 
     if (!exposedData.isPlaying) play()
   }
+
+  // Cheat
+  useEffect(() => {
+    window.addEventListener('keydown', e => {
+      if (e.code == 'KeyC') {
+        console.log('Cheat')
+        console.log(congratsSound)
+        playCongrats()
+        setAmountOfUncovered(20)
+        const allCardsClosed = cards.map(card => ({ ...card, isOpen: true }))
+        setCards(allCardsClosed)
+      }
+    })
+    return () => {}
+  }, [playCongrats])
 
   useEffect(() => {
     // const confettiSettings = { target: 'my-canvas' }
