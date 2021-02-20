@@ -1,0 +1,25 @@
+.LogoScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  height: 100vh;
+  width: 100%;
+  background-color: #fff;
+  animation: logoscreen-anim 5s forwards;
+}
+
+@keyframes logoscreen-anim {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

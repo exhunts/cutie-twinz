@@ -9,6 +9,8 @@ import fishImage from '../../assets/images/fish.png'
 import glassBallImage from '../../assets/images/glass-ball.png'
 import iceCreamImage from '../../assets/images/ice-cream.png'
 import baloonImage from '../../assets/images/baloon.png'
+import reactLogoImage from '../../assets/images/react-logo.svg'
+import jsLogoImage from '../../assets/images/js-logo.svg'
 
 import music from '../../assets/audio/music/main.mp3'
 
@@ -22,20 +24,19 @@ import useSound from 'use-sound'
 import Logo from '../Logo'
 import ButtonStartAgain from '../ButtonStartAgain'
 import ConfettiGenerator from 'confetti-js'
+import LogoScreen from '../LogoScreen/LogoScreen'
 
 function App() {
   // For cheat only
   const [playCongrats] = useSound(congratsSound)
-
   const [activePairCardsArray, setActivePairCardsArray] = useState([])
-
-  // const [activePairCardsArray, setActivePairCardsArray] = useState([])
   const [isFieldClickable, setIsFieldClickable] = useState(false)
   const [amountOfUncovered, setAmountOfUncovered] = useState(0)
-  // const [isGamePlaying, setisGamePlaying] = useState(false)
   const [play, exposedData] = useSound(music, {
     loop: true,
+    volume: 0.6,
   })
+  const [isLogoScreenVisible, setIsLogoScreenVisible] = useState(true)
 
   const [cards, setCards] = useState([
     {
@@ -179,8 +180,6 @@ function App() {
   useEffect(() => {
     window.addEventListener('keydown', e => {
       if (e.code == 'KeyC') {
-        console.log('Cheat')
-        console.log(congratsSound)
         playCongrats()
         setAmountOfUncovered(20)
         const allCardsClosed = cards.map(card => ({ ...card, isOpen: true }))
@@ -191,7 +190,6 @@ function App() {
   }, [playCongrats])
 
   useEffect(() => {
-    // const confettiSettings = { target: 'my-canvas' }
     const confettiSettings = {
       target: 'my-canvas',
       max: '80',
@@ -223,53 +221,93 @@ function App() {
     return () => confetti.clear()
   }, [])
 
-  // const closeAllCards = cards => {
-  //   const allCardsClosed = cards.map(card => ({ ...card, isOpen: false }))
-  //   setCards(allCardsClosed)
-  // }
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLogoScreenVisible(false)
+    }, 5000)
+  }, [])
 
   return (
-    <div className="game">
-      <canvas
-        id="my-canvas"
-        style={{
-          position: 'absolute',
-          zIndex: 0,
-          display: amountOfUncovered === 20 ? 'block' : 'none',
-        }}
-      ></canvas>
-      <ButtonStartAgain startGame={startGame} />
-      <Logo />
+    <>
+      {isLogoScreenVisible && <LogoScreen />}
+      <div className="game">
+        <canvas
+          id="my-canvas"
+          style={{
+            position: 'absolute',
+            zIndex: 0,
+            width: '100%',
+            height: '100%',
+            display: amountOfUncovered === 20 ? 'block' : 'none',
+          }}
+        ></canvas>
+        <ButtonStartAgain startGame={startGame} />
+        <Logo />
+        <img
+          style={{
+            width: '150px',
+            height: '150px',
+            position: 'absolute',
+            left: '20px',
+            bottom: '20px',
+          }}
+          src={reactLogoImage}
+          alt=""
+        />
+        <img
+          style={{
+            width: '150px',
+            height: '150px',
+            position: 'absolute',
+            right: '20px',
+            top: '20px',
+          }}
+          src={jsLogoImage}
+          alt=""
+        />
 
-      <div
-        className="inner"
-        style={
-          isFieldClickable
-            ? { pointerEvents: 'auto' }
-            : { pointerEvents: 'none' }
-        }
-      >
-        <div className="field">
-          <img className="frame" src={frameImage} alt="frame" />
-          <div className="frame-inner">
-            {cards.map((card, index) => (
-              <Card
-                key={card.id}
-                card={card}
-                activePairCardsArray={activePairCardsArray}
-                setActivePairCardsArray={setActivePairCardsArray}
-                index={index}
-                cards={cards}
-                setCards={setCards}
-                setAmountOfUncovered={setAmountOfUncovered}
-                setIsFieldClickable={setIsFieldClickable}
-                amountOfUncovered={amountOfUncovered}
-              />
-            ))}
+        <div
+          className="inner"
+          style={
+            isFieldClickable
+              ? { pointerEvents: 'auto' }
+              : { pointerEvents: 'none' }
+          }
+        >
+          <div className="field">
+            <img className="frame" src={frameImage} alt="frame" />
+            <div className="frame-inner">
+              {cards.map((card, index) => (
+                <Card
+                  key={card.id}
+                  card={card}
+                  activePairCardsArray={activePairCardsArray}
+                  setActivePairCardsArray={setActivePairCardsArray}
+                  index={index}
+                  cards={cards}
+                  setCards={setCards}
+                  setAmountOfUncovered={setAmountOfUncovered}
+                  setIsFieldClickable={setIsFieldClickable}
+                  amountOfUncovered={amountOfUncovered}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          fontFamily: 'sans-serif',
+        }}
+      >
+        Code and Design by Gregory Kafanov 2021
+      </div>
+    </>
   )
 }
 
