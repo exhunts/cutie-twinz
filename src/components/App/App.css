@@ -18,6 +18,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  /* transform: scale(0.5); */
 }
 
 .frame {
@@ -38,4 +39,10 @@
   top: 182px;
   left: 141px;
   justify-content: center;
+}
+
+@media (max-width: 1366px), (max-height: 768px) {
+  .inner {
+    transform: scale(0.75);
+  }
 }
