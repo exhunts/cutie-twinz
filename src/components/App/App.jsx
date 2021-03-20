@@ -179,7 +179,7 @@ function App() {
   // Cheat
   useEffect(() => {
     window.addEventListener('keydown', e => {
-      if (e.code == 'KeyC') {
+      if (e.code == 'KeyH') {
         playCongrats()
         setAmountOfUncovered(20)
         const allCardsClosed = cards.map(card => ({ ...card, isOpen: true }))
@@ -241,6 +241,20 @@ function App() {
             display: amountOfUncovered === 20 ? 'block' : 'none',
           }}
         ></canvas>
+        <div
+          style={{
+            position: 'absolute',
+            top: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            fontFamily: 'sans-serif',
+            userSelect: 'text',
+            color: '#fff',
+          }}
+        >
+          📫 mail me: gregory.k@filancy.com 🐈
+        </div>
+
         <ButtonStartAgain startGame={startGame} />
         <Logo />
         <img
